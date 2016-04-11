@@ -9,13 +9,13 @@ app.engine('html', hbs.__express);
 app.use(express.static('static'));
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 var uiContr = require('./controllers/uiController');
 app.get('/', uiContr.getRootHandler);
 
 var restContr = require('./controllers/restController')(azureStorage);
-app.get('/rest/data', restContr.postDataHandler);
+app.post('/rest/data', restContr.postDataHandler);
 
 var tableSvc = azureStorage.createTableService();
 tableSvc.createTableIfNotExists('arduinoData', function(error, result, response){
