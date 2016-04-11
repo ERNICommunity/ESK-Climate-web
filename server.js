@@ -11,7 +11,7 @@ app.use(express.static('static'));
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-var uiContr = require('./controllers/uiController');
+var uiContr = require('./controllers/uiController')(azureStorage);
 app.get('/', uiContr.getRootHandler);
 
 var restContr = require('./controllers/restController')(azureStorage);
@@ -24,7 +24,7 @@ tableSvc.createTableIfNotExists('arduinoData', function(error, result, response)
 		process.exit(1);
 	}
 	else {
-		console.log('Table ' + (result.created ? 'created' : 'exists'))
+		console.log('Table arduinoData ' + (result.created ? 'created' : 'exists'))
 		app.listen(port, function(err) {
 			if (err) {
 				console.error('Server initialization failed', err);

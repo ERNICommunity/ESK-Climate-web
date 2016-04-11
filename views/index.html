@@ -5,6 +5,21 @@
         <title>ESK Climate</title>
     </head>
     <body>
-        its alive
+        <table>
+					<tr>
+						<th>Timestamp</th>
+						<th>SensorId</th>
+						<th>Temperature</th>
+						<th>Humidity</th>
+					</tr>
+        	{{#each entries}}
+					<tr>
+						<td>{{Timestamp._}}</td>
+						<td>{{sensorId._}}</td>
+						<td>{{temperature._}}</td>
+						<td>{{humidity._}}</td>
+					</tr>
+					{{/each}}
+        </table>
     </body>
 </html>
